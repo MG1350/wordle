@@ -28,6 +28,7 @@ public class Wordle {
     public void enterAction(String s) {
         boolean real = false;
         String[] letters = {"#", "#", "#", "#", "#"};
+        int[] count = {0,0,0,0,0};
         for (String word : WordleDictionary.FIVE_LETTER_WORDS)
         {
             if(s.equalsIgnoreCase(word))
@@ -45,19 +46,21 @@ public class Wordle {
             for(int i = 0; i < 5; i++)
             {
                 boolean letterInList = false;
-                for(String letta : letters)
+                for(int j = 0; j < 5; j++)
                 {
-                    if(letta.equalsIgnoreCase(s.substring(i,i+1)))
+                    if(letters[j].equalsIgnoreCase(s.substring(i,i+1)))
                     {
                         letterInList = true;
+                        count[j] += 1;
                     }
                 }
                 if(!letterInList)
                 {
                     letters[i] = s.substring(i,i+1);
+                    count[i] += 1;
                 }
             }
-            System.out.println(letters[0] + letters[1] + letters[2] +letters[3] +letters[4]);
+            System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
         }
     }
 
