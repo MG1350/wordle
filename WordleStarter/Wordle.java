@@ -29,6 +29,23 @@ public class Wordle {
         boolean real = false;
         String[] letters = {"#", "#", "#", "#", "#"};
         int[] count = {0,0,0,0,0};
+        for(int i = 0; i < 5; i++)
+        {
+            boolean letterInList = false;
+            for(int j = 0; j < 5; j++)
+            {
+                if(letters[j].equalsIgnoreCase(s.substring(i,i+1)))
+                {
+                    letterInList = true;
+                    count[j] += 1;
+                }
+            }
+            if(!letterInList)
+            {
+                letters[i] = s.substring(i,i+1);
+                count[i] += 1;
+            }
+        }
         for (String word : WordleDictionary.FIVE_LETTER_WORDS)
         {
             if(s.equalsIgnoreCase(word))
@@ -40,26 +57,18 @@ public class Wordle {
         {
             gw.showMessage("Not in word list");
         }
+        else if(s.equalsIgnoreCase(randomWord))
+        {
+            gw.showMessage("Word Found!");
+            for(int i = 0; i < 5; i++)
+            {
+                gw.setSquareColor(gw.getCurrentRow(), i, gw.CORRECT_COLOR);
+            }
+            System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
+        }
         else
         {
             gw.showMessage("Nice guess");
-            for(int i = 0; i < 5; i++)
-            {
-                boolean letterInList = false;
-                for(int j = 0; j < 5; j++)
-                {
-                    if(letters[j].equalsIgnoreCase(s.substring(i,i+1)))
-                    {
-                        letterInList = true;
-                        count[j] += 1;
-                    }
-                }
-                if(!letterInList)
-                {
-                    letters[i] = s.substring(i,i+1);
-                    count[i] += 1;
-                }
-            }
             System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
         }
     }
