@@ -67,7 +67,7 @@ public class Wordle {
                 Rcount[i] += 1;
             }
         }
-        for (String word : WordleDictionary.FIVE_LETTER_WORDS)
+        for(String word : WordleDictionary.FIVE_LETTER_WORDS)
         {
             if(s.equalsIgnoreCase(word))
             {
@@ -100,11 +100,18 @@ public class Wordle {
                 if(s.substring(i,i+1).equalsIgnoreCase(randomWord.substring(i,i+1)))
                 {
                     gw.setSquareColor(gw.getCurrentRow(), i, gw.CORRECT_COLOR);
-                    for(int j = 0; j < 5; j++)
-                    {
-                        if(letters[j].equalsIgnoreCase(s.substring(i,i+1)))
-                        {
-                            count[j] -= 1;
+                    // Decrement count in guess word
+                    for(int j = 0; j < 5; j++) {
+                        if(letters[j].equalsIgnoreCase(s.substring(i, i + 1)) && count[j] > 0) {
+                            count[j]--;
+                            break;
+                        }
+                    }
+                    // Decrement count in randomWord
+                    for(int k = 0; k < 5; k++) {
+                        if(Rletters[k].equalsIgnoreCase(s.substring(i, i + 1)) && Rcount[k] > 0) {
+                            Rcount[k]--;
+                            break;
                         }
                     }
                 }
@@ -112,19 +119,15 @@ public class Wordle {
             // Adding the yellow letters
             for(int i = 0; i < 5; i++)
             {
-                if(count[i] > 0)
+                if(!s.substring(i, i + 1).equalsIgnoreCase(randomWord.substring(i, i + 1))) 
                 {
-                    boolean letterExists = false;
                     for(int j = 0; j < 5; j++)
                     {
-                        if(Rletters[j].equalsIgnoreCase(letters[i]))
-                        {
-                            letterExists = true;
-                        }
                     }
                 }
             }
             System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
+            System.out.println(Rletters[0]+Rcount[0] + Rletters[1]+Rcount[1] + Rletters[2]+Rcount[2] + Rletters[3]+Rcount[3] + Rletters[4]+Rcount[4]);
             gw.setCurrentRow(gw.getCurrentRow()+1);
         }
     }
