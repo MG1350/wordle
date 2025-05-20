@@ -123,6 +123,18 @@ public class Wordle {
                 {
                     for(int j = 0; j < 5; j++)
                     {
+                        if (letters[j].equalsIgnoreCase(s.substring(i, i + 1)) && count[j] > 0)
+                        {
+                            for(int k = 0; k < 5; k++)
+                            {
+                                if(Rletters[k].equalsIgnoreCase(s.substring(i, i + 1)) && Rcount[k] > 0 )
+                                {
+                                    gw.setSquareColor(gw.getCurrentRow(), i, gw.PRESENT_COLOR);
+                                    count[j]--;
+                                    Rcount[k]--;
+                                }
+                            }
+                        }
                     }
                 }
             }
