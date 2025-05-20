@@ -28,7 +28,10 @@ public class Wordle {
     public void enterAction(String s) {
         boolean real = false;
         String[] letters = {"#", "#", "#", "#", "#"};
+        String[] Rletters = {"#", "#", "#", "#", "#"};
         int[] count = {0,0,0,0,0};
+        int[] Rcount = {0,0,0,0,0};
+        // Setting letters and count for user word
         for(int i = 0; i < 5; i++)
         {
             boolean letterInList = false;
@@ -44,6 +47,24 @@ public class Wordle {
             {
                 letters[i] = s.substring(i,i+1);
                 count[i] += 1;
+            }
+        }
+        // Setting letters and count for random word
+        for(int i = 0; i < 5; i++)
+        {
+            boolean letterInList = false;
+            for(int j = 0; j < 5; j++)
+            {
+                if(Rletters[j].equalsIgnoreCase(randomWord.substring(i,i+1)))
+                {
+                    letterInList = true;
+                    Rcount[j] += 1;
+                }
+            }
+            if(!letterInList)
+            {
+                Rletters[i] = randomWord.substring(i,i+1);
+                Rcount[i] += 1;
             }
         }
         for (String word : WordleDictionary.FIVE_LETTER_WORDS)
@@ -65,11 +86,31 @@ public class Wordle {
                 gw.setSquareColor(gw.getCurrentRow(), i, gw.CORRECT_COLOR);
             }
             System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
+            System.out.println(Rletters[0]+Rcount[0] + Rletters[1]+Rcount[1] + Rletters[2]+Rcount[2] + Rletters[3]+Rcount[3] + Rletters[4]+Rcount[4]);
         }
         else
         {
             gw.showMessage("Nice guess");
             System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
+            System.out.println(Rletters[0]+Rcount[0] + Rletters[1]+Rcount[1] + Rletters[2]+Rcount[2] + Rletters[3]+Rcount[3] + Rletters[4]+Rcount[4]);
+            System.out.println(randomWord);
+            // Adding the green letters and removing from input word count array
+            for(int i = 0; i < 5; i++)
+            {
+                if(s.substring(i,i+1).equalsIgnoreCase(randomWord.substring(i,i+1)))
+                {
+                    gw.setSquareColor(gw.getCurrentRow(), i, gw.CORRECT_COLOR);
+                    for(int j = 0; j < 5; j++)
+                    {
+                        if(letters[j].equalsIgnoreCase(s.substring(i,i+1)))
+                        {
+                            count[j] -= 1;
+                        }
+                    }
+                }
+            }
+            System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
+            gw.setCurrentRow(gw.getCurrentRow()+1);
         }
     }
 
