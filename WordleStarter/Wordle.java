@@ -109,6 +109,21 @@ public class Wordle {
                     }
                 }
             }
+            // Adding the yellow letters
+            for(int i = 0; i < 5; i++)
+            {
+                if(count[i] > 0)
+                {
+                    boolean letterExists = false;
+                    for(int j = 0; j < 5; j++)
+                    {
+                        if(Rletters[j].equalsIgnoreCase(letters[i]))
+                        {
+                            letterExists = true;
+                        }
+                    }
+                }
+            }
             System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
             gw.setCurrentRow(gw.getCurrentRow()+1);
         }
