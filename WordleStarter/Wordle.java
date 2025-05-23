@@ -35,11 +35,7 @@ public class Wordle {
         int[] Rcount = {0,0,0,0,0};
         if(!(s.length() == 5))
         {
-            String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-            for(String letter : alphabet)
-            {
-                System.out.println(letter);
-            }
+            gw.showMessage("Word not long enough");
         }
         else
         {
