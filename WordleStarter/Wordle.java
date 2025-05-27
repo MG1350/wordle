@@ -38,6 +38,7 @@ public class Wordle {
             // Printing every possible word checking if each letter for missing color or guess letter in place of a green letter does not match
             if(s.length() == 0)
             {
+                gw.showMessage("Printing possible words");
                 for(String word : WordleDictionary.FIVE_LETTER_WORDS)
                 {
                     boolean possible = true;
