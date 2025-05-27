@@ -35,6 +35,7 @@ public class Wordle {
         int[] Rcount = {0,0,0,0,0};
         if(!(s.length() == 5))
         {
+            // Printing every possible word checking if each letter for missing color or guess letter in place of a green letter does not match
             if(s.length() == 0)
             {
                 for(String word : WordleDictionary.FIVE_LETTER_WORDS)
