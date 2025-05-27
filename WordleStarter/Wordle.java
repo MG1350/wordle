@@ -35,7 +35,28 @@ public class Wordle {
         int[] Rcount = {0,0,0,0,0};
         if(!(s.length() == 5))
         {
-            gw.showMessage("Word not long enough");
+            if(s.length() == 0)
+            {
+                for(String word : WordleDictionary.FIVE_LETTER_WORDS)
+                {
+                    boolean possible = true;
+                    for(int i = 0; i < 5; i++)
+                    {
+                        if(gw.getKeyColor(word.substring(i,i+1).toUpperCase()) == gw.MISSING_COLOR)
+                        {
+                            possible = false;
+                        }
+                    }
+                    if(possible)
+                    {
+                        System.out.println(word);
+                    }
+                }
+            }
+            else
+            {
+                gw.showMessage("Word not long enough");
+            }
         }
         else
         {
