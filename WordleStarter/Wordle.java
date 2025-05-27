@@ -42,7 +42,7 @@ public class Wordle {
                     boolean possible = true;
                     for(int i = 0; i < 5; i++)
                     {
-                        if(gw.getKeyColor(word.substring(i,i+1).toUpperCase()) == gw.MISSING_COLOR)
+                        if(gw.getKeyColor(word.substring(i,i+1).toUpperCase()) == gw.MISSING_COLOR || (gw.getKeyColor(randomWord.substring(i,i+1).toUpperCase())) == gw.CORRECT_COLOR && !(randomWord.substring(i,i+1).equalsIgnoreCase(word.substring(i,i+1))))
                         {
                             possible = false;
                         }
