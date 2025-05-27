@@ -35,16 +35,26 @@ public class Wordle {
         int[] Rcount = {0,0,0,0,0};
         if(!(s.length() == 5))
         {
-            // Printing every possible word checking if each letter for missing color or guess letter in place of a green letter does not match
+            // Printing every possible word
             if(s.length() == 0)
             {
                 gw.showMessage("Printing possible words");
                 for(String word : WordleDictionary.FIVE_LETTER_WORDS)
                 {
                     boolean possible = true;
+                    String[] Yletters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+                    // Checking if each letter for missing color or guess letter in place of a green letter does not match
                     for(int i = 0; i < 5; i++)
                     {
                         if(gw.getKeyColor(word.substring(i,i+1).toUpperCase()) == gw.MISSING_COLOR || (gw.getKeyColor(randomWord.substring(i,i+1).toUpperCase())) == gw.CORRECT_COLOR && !(randomWord.substring(i,i+1).equalsIgnoreCase(word.substring(i,i+1))))
+                        {
+                            possible = false;
+                        }
+                    }
+                    // Checking if the word has a yellow character not in the word
+                    for(String letter : Yletters)
+                    {
+                        if(gw.getKeyColor(letter) == gw.PRESENT_COLOR && word.indexOf(letter.toLowerCase()) == -1)
                         {
                             possible = false;
                         }
