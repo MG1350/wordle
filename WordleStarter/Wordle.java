@@ -7,6 +7,10 @@
 
 import edu.willamette.cs1.wordle.WordleDictionary;
 import edu.willamette.cs1.wordle.WordleGWindow;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Wordle {
 
@@ -14,6 +18,30 @@ public class Wordle {
         gw = new WordleGWindow();
         gw.addEnterListener((s) -> enterAction(s));
         randomWord = WordleDictionary.FIVE_LETTER_WORDS[(int) (Math.random()*WordleDictionary.FIVE_LETTER_WORDS.length)];
+        File score = new File("score.txt");
+        try {
+            if (score.createNewFile()) {
+                System.out.println("Score created successfully.");
+                FileWriter fw = new FileWriter(score);
+                fw.write("0\n");
+                fw.write("0\n");
+                fw.write("0\n");
+                fw.write("0\n");
+                fw.write("0\n");
+                fw.write("0\n");
+                fw.close();
+            } else {
+                System.out.println("Score already exists.");
+                for(int i = 0; i < 6; i++)
+                {
+                    gw.setSquareColor(i, 0, gw.CORRECT_COLOR);
+                    gw.setSquareLetter(i, 0, i+1+"");
+                    gw.setSquareLetter(i, 4, "#");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error creating/writing to file: " + e.getMessage());
+        }
         // Debug show word in first row
         // for(int i = 0; i <= WordleGWindow.N_COLS-1; i++)
         // {
