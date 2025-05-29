@@ -8,9 +8,12 @@
 import edu.willamette.cs1.wordle.WordleDictionary;
 import edu.willamette.cs1.wordle.WordleGWindow;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStreamReader;
 
 public class Wordle {
 
@@ -32,12 +35,15 @@ public class Wordle {
                 fw.close();
             } else {
                 System.out.println("Score already exists.");
+                FileInputStream file = new FileInputStream("score.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(file));
                 for(int i = 0; i < 6; i++)
                 {
                     gw.setSquareColor(i, 0, gw.CORRECT_COLOR);
                     gw.setSquareLetter(i, 0, i+1+"");
-                    gw.setSquareLetter(i, 4, "#");
+                    gw.setSquareLetter(i, 4, reader.readLine());
                 }
+                reader.close();
             }
         } catch (IOException e) {
             System.out.println("Error creating/writing to file: " + e.getMessage());
