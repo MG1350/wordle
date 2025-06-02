@@ -22,6 +22,7 @@ public class Wordle {
         gw.addEnterListener((s) -> enterAction(s));
         randomWord = WordleDictionary.FIVE_LETTER_WORDS[(int) (Math.random()*WordleDictionary.FIVE_LETTER_WORDS.length)];
         File score = new File("score.txt");
+        scoreboard = new int[6];
         try {
             if (score.createNewFile()) {
                 System.out.println("Score created successfully.");
@@ -39,9 +40,11 @@ public class Wordle {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(file));
                 for(int i = 0; i < 6; i++)
                 {
+                    int number = Integer.valueOf(reader.readLine());
                     gw.setSquareColor(i, 0, gw.CORRECT_COLOR);
                     gw.setSquareLetter(i, 0, i+1+"");
-                    gw.setSquareLetter(i, 4, reader.readLine());
+                    gw.setSquareLetter(i, 4, number+"");
+                    scoreboard[i] = number;
                 }
                 reader.close();
             }
@@ -161,6 +164,18 @@ public class Wordle {
                 gw.setSquareColor(gw.getCurrentRow(), i, gw.CORRECT_COLOR);
                 gw.setKeyColor(s.substring(i, i + 1), gw.CORRECT_COLOR);
             }
+            try (FileWriter fw = new FileWriter("score.txt", false)) {
+                for(int i = 0; i < 6; i++)
+                {
+                    if(i == gw.getCurrentRow())
+                    {
+                        scoreboard[i] += 1;
+                    }
+                    fw.write(scoreboard[i]+"\n");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
             System.out.println(Rletters[0]+Rcount[0] + Rletters[1]+Rcount[1] + Rletters[2]+Rcount[2] + Rletters[3]+Rcount[3] + Rletters[4]+Rcount[4]);
         }
@@ -242,4 +257,5 @@ public class Wordle {
 
     private WordleGWindow gw;
     private String randomWord;
+    private int[] scoreboard;
 }
