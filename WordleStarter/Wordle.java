@@ -176,14 +176,10 @@ public class Wordle {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
-            System.out.println(Rletters[0]+Rcount[0] + Rletters[1]+Rcount[1] + Rletters[2]+Rcount[2] + Rletters[3]+Rcount[3] + Rletters[4]+Rcount[4]);
         }
         else
         {
             gw.showMessage("Nice guess");
-            System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
-            System.out.println(Rletters[0]+Rcount[0] + Rletters[1]+Rcount[1] + Rletters[2]+Rcount[2] + Rletters[3]+Rcount[3] + Rletters[4]+Rcount[4]);
             System.out.println(randomWord);
             // Adding the green letters and removing from input word count array
             for(int i = 0; i < 5; i++)
@@ -239,8 +235,6 @@ public class Wordle {
                     }
                 }
             }
-            System.out.println(letters[0]+count[0] + letters[1]+count[1] + letters[2]+count[2] + letters[3]+count[3] + letters[4]+count[4]);
-            System.out.println(Rletters[0]+Rcount[0] + Rletters[1]+Rcount[1] + Rletters[2]+Rcount[2] + Rletters[3]+Rcount[3] + Rletters[4]+Rcount[4]);
             if(gw.getCurrentRow() < 5)
                 gw.setCurrentRow(gw.getCurrentRow()+1);
         }
