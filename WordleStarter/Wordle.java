@@ -101,6 +101,7 @@ public class Wordle {
                         System.out.println(word);
                     }
                 }
+                System.out.println("========");
             }
             else
             {
