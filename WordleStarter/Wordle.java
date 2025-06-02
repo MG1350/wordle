@@ -180,7 +180,6 @@ public class Wordle {
         else
         {
             gw.showMessage("Nice guess");
-            System.out.println(randomWord);
             // Adding the green letters and removing from input word count array
             for(int i = 0; i < 5; i++)
             {
